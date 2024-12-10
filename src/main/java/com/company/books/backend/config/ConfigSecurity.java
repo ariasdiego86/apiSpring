@@ -75,6 +75,7 @@ public class ConfigSecurity {
                     .requestMatchers(HttpMethod.POST, "/v1/autores").hasRole("BOSS")
                     .requestMatchers(HttpMethod.PUT, "/v1/autores/**").hasRole("BOSS")
                     .requestMatchers(HttpMethod.DELETE, "/v1/autores/**").hasRole("BOSS")
+                    .requestMatchers(HttpMethod.GET, "/autores/nacionalidad/{nacionalidad}").hasAnyRole("EMPLOYEE", "BOSS", "SCHOLAR")
                     .requestMatchers("/v1/authenticate","/v3/api-docs/**","/swagger-ui/**","/swagger-ui.html").permitAll();
         }) //TODO los asteriscos quieren decir que todo está permitido a partir de ellos (los usuarios que ya "entraron" tienen acceso si la url sigue)
                         .addFilterBefore(jwtReqFilter, UsernamePasswordAuthenticationFilter.class)

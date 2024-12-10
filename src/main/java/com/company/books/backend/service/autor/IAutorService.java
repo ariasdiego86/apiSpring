@@ -17,4 +17,6 @@ public interface IAutorService {
 
     public ResponseEntity<AutorDto> deleteAutor(Long id);
 
+    public ResponseEntity<List<AutorDto>> getAutorByNational(String nacionalidad);
+
 }

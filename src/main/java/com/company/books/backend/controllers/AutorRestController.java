@@ -43,4 +43,9 @@ public class AutorRestController {
     public ResponseEntity<AutorDto> deleteAutor(@PathVariable Long id){
         return service.deleteAutor(id);
     }
+
+    @GetMapping("/autores/nacionalidad/{nacionalidad}")
+    public ResponseEntity<List<AutorDto>> getAutoresByNational(@PathVariable String nacionalidad){
+        return service.getAutorByNational(nacionalidad);
+    }
 }

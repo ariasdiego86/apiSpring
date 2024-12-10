@@ -47,6 +47,7 @@ public class AutorServiceImpl implements IAutorService {
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<AutorDto> getAutorById(Long id) {
+        log.info("Inicio del metodo getAutorById {}", id);
         try {
             Autor autor = autorDao.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Autor no encontrado con id: " + id));
@@ -64,7 +65,7 @@ public class AutorServiceImpl implements IAutorService {
     @Override
     @Transactional
     public ResponseEntity<AutorDto> insertAutor(AutorDto autorDto) {
-        log.info("Inicio del método crearAutor");
+        log.info("Inicio del metodo insertAutor {}", autorDto);
         try {
             Autor autor = mapToEntity(autorDto);
             Autor autorGuardado = autorDao.save(autor);
@@ -79,6 +80,7 @@ public class AutorServiceImpl implements IAutorService {
     @Override
     @Transactional
     public ResponseEntity<AutorDto> updateAutor(AutorDto autorDto, Long id) {
+        log.info("Inicio del metodo updateAutor {}", id);
         try {
             // Busca el autor por ID
             Autor autor = autorDao.findById(id)
@@ -107,6 +109,7 @@ public class AutorServiceImpl implements IAutorService {
     @Override
     @Transactional
     public ResponseEntity<AutorDto> deleteAutor(Long id) {
+        log.info("Inicio del metodo deleteAutor {}", id);
         try {
             Autor autor = autorDao.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Autor no encontrado con id: " + id));
@@ -118,6 +121,30 @@ public class AutorServiceImpl implements IAutorService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } catch (Exception e) {
             log.error("Error al eliminar autor: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<List<AutorDto>> getAutorByNational(String nacionalidad) {
+        log.info("Inicio del metodo buscarAutoresPorNacionalidad con nacionalidad: {}", nacionalidad);
+
+        try {
+            List<Autor> autores = autorDao.findByNacionalidad(nacionalidad);
+
+            if (autores.isEmpty()) {
+                log.info("No se encontraron autores con la nacionalidad: {}", nacionalidad);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+
+            List<AutorDto> autoresDto = autores.stream()
+                    .map(this::mapToDto)
+                    .toList();
+
+            return ResponseEntity.ok(autoresDto);
+
+        } catch (Exception e) {
+            log.error("Error inesperado al buscar autores por nacionalidad: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }

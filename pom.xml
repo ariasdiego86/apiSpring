@@ -100,7 +100,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.28</version> <!-- Asegúrate de usar una versión compatible -->
+            <version>1.18.30</version> <!-- Asegúrate de usar una versión compatible -->
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -116,6 +116,11 @@
         <repository>
             <id>springdoc-repo</id>
             <url>https://repo.spring.io/release</url>
+        </repository>
+
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
         </repository>
     </repositories>
 

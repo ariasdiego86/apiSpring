@@ -1,7 +1,7 @@
-CREATE DATABASE db_books;
+-- CREATE DATABASE db_books; -- Ya se crea automáticamente por docker-compose
 
-SHOW TABLES;
-SHOW FULL TABLES;
+-- SHOW TABLES;
+-- SHOW FULL TABLES;
 USE `db_books`;
 
 DROP TABLE IF EXISTS `authorities`;
@@ -24,9 +24,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` 
 VALUES 
-('BigResio','{bcrypt}$2a$12$/M57HBsueOyWco6l7Bf2puua9GfYzJ2AeSTij4znluH3vcdTjhkHW',1),
-('Resio','{bcrypt}$2a$12$kOmCs/IDuQuBA063N.x6fen46W09THRH.VwiVhFw0GHQP5eG4ZiZ6',1),
-('MiniResio','{bcrypt}$2a$12$rcEKP6lYDucmLgPjTW19Iuly0ZRJ3/qL1GqOFrNVMISbiOXvw/R0u',1);
+('BigResio','{bcrypt}$2a$12$TSKtDQ/1vMdyBqJ4fkTmUOyK0tPBwiFs.PIqEGC6P/.7dycljU4o.',1), -- password: BigResio123
+('Resio','{bcrypt}$2a$12$UlF6so6Z8NbW6/CdPNwwjOgPLzkardn6lgCdRMWw55Tt5kpA1flVO',1), -- password: Resio123
+('MiniResio','{bcrypt}$2a$12$bBxtLMavu/po6HMsffnbC.YavlDFjQTYvPqO1q2zHTpDauuxi3hFC',1); -- password: MiniResio123
 
 
 -- *********************************
@@ -49,12 +49,11 @@ VALUES
 ('Resio','ROLE_EMPLOYEE'),
 ('Resio','ROLE_SCHOLAR'),
 ('BigResio','ROLE_BOSS'),
-('MiniResio','ROLE_SCHOLAR')
+('MiniResio','ROLE_SCHOLAR');
 
-SELECT * FROM AUTOR;
-SELECT * FROM LIBROS;
-SELECT * FROM CATEGORIA;
-SELECT * FROM USERS;
-SELECT * FROM AUTHORITIES;
-
-
+-- Los siguientes SELECT se ejecutarán cuando Spring Boot cree las tablas de entidades
+-- SELECT * FROM AUTOR;
+-- SELECT * FROM LIBROS;
+-- SELECT * FROM CATEGORIA;
+-- SELECT * FROM USERS;
+-- SELECT * FROM AUTHORITIES;

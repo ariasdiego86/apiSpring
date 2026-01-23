@@ -14,7 +14,7 @@ services:
       - ./DB/spring-security-schema-bcrypt.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - books_network
-    restart: unless-stopped
+    restart: no
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p1234"]
       interval: 10s
